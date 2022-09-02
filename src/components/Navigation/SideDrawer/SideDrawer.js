@@ -1,9 +1,19 @@
 import React from "react";
 
+import Logo from "../../Logo/Logo";
+import NavigationItems from "../NavigationItems/NavigationItems";
+import classes from "./SideDrawer.module.css";
+
 const sideDrawer = (props) => {
     //...some instructional logics here
 
     return (
+        <div className={classes.SideDrawer}>
+            <Logo />
+            <nav>
+                <NavigationItems />
+            </nav>
+        </div>
 
     );
 };
