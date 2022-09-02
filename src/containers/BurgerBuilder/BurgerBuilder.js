@@ -3,7 +3,8 @@ import React, {Component} from "react";
 import Aux from "../../hoc/Aux";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const INGREDIENTS_PRICES = { //THIS ARE GLOBAL PRICES FOR EACH INGRDIENTS 
     // THAT IS WHY IT IS OUTSIDE THE CLASS SCOPE
@@ -25,7 +26,32 @@ class BurgerBuilder extends Component {
             "cheese": 0,
             "meat": 0
         },
-        totalPrice: 4
+        totalPrice: 4,
+        purchasable: false,
+        purchasingItems: false
+    }
+
+    updatePurchasable = (ingredients)=>{
+        const sum = Object.keys(ingredients)
+            .map(igkeys =>{
+                return ingredients[igkeys];
+            })
+            .reduce((sum, el) => {
+                return sum + el;
+            }, 0);
+        this.setState({purchasable: sum > 0})
+    }
+
+    purchasingItemsHandler = () => {
+        this.setState({purchasingItems: true})
+    }
+
+    purchasingItemsClosed = () => {
+        this.setState({purchasingItems: false})
+    }
+
+    purchasingItemsContinued = () => {
+        alert("You ordered, proceed to payment")
     }
 
     addIngredientHandler = (type) => {
@@ -42,6 +68,7 @@ class BurgerBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updatedIngredients
         })
+        this.updatePurchasable(updatedIngredients);
     }
 
     removeIngredientHandler = (type) => {
@@ -61,6 +88,7 @@ class BurgerBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updatedIngredients
         })
+        this.updatePurchasable(updatedIngredients);
 
     }
 
@@ -75,11 +103,21 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <Modal show={this.state.purchasingItems} 
+                        modalClosed = {this.purchasingItemsClosed}>
+                    <OrderSummary ingredients={this.state.ingredients} 
+                    purchasingCanceled = {this.purchasingItemsClosed}
+                    purchasingContinue = {this.purchasingItemsContinued}
+                    price = {this.state.totalPrice}/>
+                </Modal>
                 <Burger ingredients= {this.state.ingredients}/>
                 <BuildControls 
                 addIngredients = {this.addIngredientHandler}
                 removingIngredients = {this.removeIngredientHandler}
-                disabledInfo ={disabledInfo} />
+                disabledInfo ={disabledInfo}
+                purchasable = {this.state.purchasable}
+                ordered = {this.purchasingItemsHandler}
+                price={this.state.totalPrice} />
             </Aux>
         );
     };
