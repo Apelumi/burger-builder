@@ -1,0 +1,52 @@
+[debug] [2022-09-09T14:07:02.798Z] ----------------------------------------------------------------------
+[debug] [2022-09-09T14:07:02.806Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2022-09-09T14:07:02.807Z] CLI Version:   11.8.0
+[debug] [2022-09-09T14:07:02.808Z] Platform:      linux
+[debug] [2022-09-09T14:07:02.808Z] Node Version:  v16.16.0
+[debug] [2022-09-09T14:07:02.810Z] Time:          Fri Sep 09 2022 15:07:02 GMT+0100 (West Africa Standard Time)
+[debug] [2022-09-09T14:07:02.810Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-09T14:07:02.819Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-09-09T14:07:02.951Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-09T14:07:02.952Z] > authorizing via signed-in user (adeyefaoluwapelumi2017@gmail.com)
+[debug] [2022-09-09T14:07:02.952Z] [iam] checking project burgerproject-ba62f for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-09-09T14:07:02.953Z] > refreshing access token with scopes: []
+[debug] [2022-09-09T14:07:02.955Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-09-09T14:07:02.955Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-09T14:07:02.965Z] FetchError: request to https://firebase-public.firebaseio.com/cli.json failed, reason: getaddrinfo EAI_AGAIN firebase-public.firebaseio.com
+    at ClientRequest.<anonymous> (/usr/local/lib/node_modules/firebase-tools/node_modules/node-fetch/lib/index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at ClientRequest.emit (node:domain:475:12)
+    at TLSSocket.socketErrorListener (node:_http_client:454:9)
+    at TLSSocket.emit (node:events:527:28)
+    at TLSSocket.emit (node:domain:475:12)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+[error] 
+[error] Error: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2022-09-09T14:07:02.969Z] [iam] error while checking permissions, command may fail: FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2022-09-09T14:07:02.970Z] > refreshing access token with scopes: []
+[debug] [2022-09-09T14:07:02.970Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-09-09T14:07:02.971Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-09T14:07:02.981Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2022-09-09T14:07:03.018Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at invalidCredentialError (/usr/local/lib/node_modules/firebase-tools/lib/auth.js:144:12)
+    at refreshTokens (/usr/local/lib/node_modules/firebase-tools/lib/auth.js:508:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Client.getAccessToken (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:149:23)
+    at async Client.addAuthHeader (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:140:21)
+    at async Client.request (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:96:34)
+    at async getFirebaseProject (/usr/local/lib/node_modules/firebase-tools/lib/management/projects.js:295:21)
+    at async getDefaultHostingSite (/usr/local/lib/node_modules/firebase-tools/lib/getDefaultHostingSite.js:8:21)
+    at async requireHostingSite (/usr/local/lib/node_modules/firebase-tools/lib/requireHostingSite.js:9:18)
+    at async Object.fn (/usr/local/lib/node_modules/firebase-tools/lib/commands/deploy.js:74:9)
+    at async /usr/local/lib/node_modules/firebase-tools/lib/command.js:214:17
+[error] 
+[error] Error: Failed to get Firebase project burgerproject-ba62f. Please make sure the project exists and your account has permission to access it.
