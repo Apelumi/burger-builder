@@ -62,28 +62,38 @@ class BurgerBuilder extends Component {
 
     purchasingItemsContinued = () => {
         //handling requests and making changes by setting the spinner
-        this.setState({spinnerloading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customerdata: {
-                name: 'Ade samuel',
-                address: {
-                    street: "No1 adeshida road akure",
-                    postalAdd: "PMB4039"
-                },
-                email: 'adeyefaoo7@gmail.com',
-            },
-            deliveryMethod: 'fastest'
-        }
-        axios.post("/orders.json", order)
-        .then(response => {
-            this.setState({spinnerloading: false, purchasingItems: false})
-        })
-        .catch(error => {
-            this.setState({spinnerloading: false, purchasingItems: false})
-        });
+        // this.setState({spinnerloading: true})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customerdata: {
+        //         name: 'Ade samuel',
+        //         address: {
+        //             street: "No1 adeshida road akure",
+        //             postalAdd: "PMB4039"
+        //         },
+        //         email: 'adeyefaoo7@gmail.com',
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
+        // axios.post("/orders.json", order)
+        // .then(response => {
+        //     this.setState({spinnerloading: false, purchasingItems: false})
+        // })
+        // .catch(error => {
+        //     this.setState({spinnerloading: false, purchasingItems: false})
+        // });
         // alert("You ordered, proceed to payment")
+        const queryParams = [];
+        for (let i in this.state.ingredients){
+            queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]))
+        }
+        queryParams.push("price=" + this.state.totalPrice)
+        const queryStrings = queryParams.join("&")
+        this.props.history.push({
+            pathname: "/checkout",
+            search: "?" + queryStrings
+        }) //basically helps us push a new page to the stack
     }
 
     addIngredientHandler = (type) => {
