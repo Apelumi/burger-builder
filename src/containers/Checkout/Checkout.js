@@ -34,6 +34,7 @@ class Checkout extends Component{
 
     // we are going to use the queryparams to extract our ingredients here
     componentWillMount () {
+        
         const query = new URLSearchParams(this.props.location.search);
         const ingredients = {};
         let price = 0;
@@ -45,7 +46,7 @@ class Checkout extends Component{
             }
             
         }
-        this.setState({ingredients: ingredients})
+        this.setState({ingredients: ingredients, price: price})
     }
 
     checkoutcancelledhandler = () => {
