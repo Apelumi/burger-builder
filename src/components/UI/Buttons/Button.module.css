@@ -15,6 +15,14 @@
     padding-left: 0;
 }
 
+.Button:disabled{
+    color: rgb(42, 121, 121);
+    cursor: not-allowed;
+    border: 1px solid #944317;
+    border-image-source: linear-gradient(to bottom right, #ff2fe0, #df34);
+    border-image-slice: 4;
+}
+
 .Success {
     color: #5C9210;
 }
